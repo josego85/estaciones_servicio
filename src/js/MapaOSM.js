@@ -18,121 +18,47 @@ function cargarMapa(){
 	}).addTo(mapa);
 
 	// OverPassAPI overlay
-	// var opl = new L.OverPassLayer({
-    //   //endpoint: "http://overpass.osm.rambler.ru/cgi/",
-	//   minzoom: 12,
-    //   query: "node(BBOX)['amenity'='fuel'];out;",
-    //   callback: function(data) {
-    //     for(var i = 0; i < data.elements.length; i++) {
-    //       var e = data.elements[i];
-	//
-    //       if (e.id in this.instance._ids) return;
-    //       this.instance._ids[e.id] = true;
-    //       var pos = new L.LatLng(e.lat, e.lon);
-    //       var popup = this.instance._poiInfo(e.tags,e.id);
-    //       var color = e.tags.collection_times ? 'green':'red';
-    //       var circle = L.circle(pos, 50, {
-    //         color: color,
-    //         fillColor: '#fa3',
-    //         fillOpacity: 0.5
-    //       })
-    //       .bindPopup(popup);
-    //       this.instance.addLayer(circle);
-    //     }
-    //   },
-    //   minZoomIndicatorOptions: {
-    //     position: 'topright',
-    //     minZoomMessageNoLayer: "no layer assigned",
-    //     minZoomMessage: "current Zoom-Level: CURRENTZOOM all data at Level: MINZOOMLEVEL"
-    //   }
-    // }).addTo(mapa);
-
-	L.layerJSON({
-		url: 'http://overpass-api.de/api/interpreter?data=[out:json];node({lat1},{lon1},{lat2},{lon2})[amenity=fuel];out;',
-		propertyItems: 'elements',
-		propertyTitle: 'tags.name',
-		propertyLoc: ['lat','lon'],
-		buildPopup: function(data, marker) {
-			return data.tags.name || null;
-		}
-	}).addTo(mapa);
-
-
-	// // Se obtiene estaciones de servicio.
-	// $.getJSON("datos/estaciones_servicio.geojson", function(data){
-	// 	layer_estaciones_servicio = L.geoJson(data, {
-	// 		pointToLayer: function(feature, latlng) {
-	// 		    // Iconos de las estaciones de servicio.
-	// 			// Copetrol.
-    //             var copetrol =  L.icon({
-    //                 iconUrl: 'recursos/img/copetrol_32px.png',
-    //                 iconSize: [32, 16]
-    //             });
-	//
-	// 			// Barcos & Rodados.
-	// 			var barcos_rodados =  L.icon({
-    //                 iconUrl: 'recursos/img/Barcos&Rodados_32px.png',
-    //                 iconSize: [32, 23]
-    //             });
-	//
-	// 			// Esso.
-    //             var esso =  L.icon({
-    //                 iconUrl: 'recursos/img/esso_32px.png',
-    //                 iconSize: [32, 23]
-    //             });
-	//
-	// 			// Petrobras.
-    //             var petrobras =  L.icon({
-    //                 iconUrl: 'recursos/img/petrobras_32px.png',
-    //                 iconSize: [32, 27]
-    //             });
-	//
-	// 			// Puma.
-    //             var puma =  L.icon({
-    //                 iconUrl: 'recursos/img/puma_32px.png',
-    //                 iconSize: [32, 14]
-    //             });
-	//
-	// 			// Por defecto.
-	// 			var predeterminado = L.icon({
-    //                 iconUrl: 'libs/leaflet/images/marker-icon.png',
-    //                 iconSize: [25, 41]
-    //             });
-	//
-	// 			var temp_icono;
-	// 		    switch (feature.properties.brand) {
-	// 				case "Barcos & Rodados":
-	// 					temp_icono = barcos_rodados;
-	// 					break;
-	// 				case "Copetrol":
-	// 					temp_icono = copetrol;
-	// 					break;
-	// 				case "Esso":
-	// 					temp_icono = esso;
-	// 					break;
-	// 	            case "Petrobras":
-	// 					temp_icono = petrobras;
-	// 					break;
-	// 				case "Puma":
-	// 					temp_icono = puma;
-	// 					break;
-	// 				default:
-	// 					temp_icono = predeterminado;
-	// 	        }
-	// 			return L.marker(latlng, {
-	// 				icon: temp_icono
-	// 			});
-    //         },
-	// 		onEachFeature: popup
-	// 	}).addTo(mapa);
-	// });
+	var opl = new L.OverPassLayer({
+        //endpoint: "http://overpass.osm.rambler.ru/cgi/",
+	    minzoom: 12,
+        query: "node(BBOX)['amenity'='fuel'];out;",
+        callback: function(data) {
+			console.log("data: ", data);
+            for(var i = 0; i < data.elements.length; i++) {
+                var elemento = data.elements[i];
+                if (elemento.id in this.instance._ids){
+					return;
+				}
+	            this.instance._ids[elemento.id] = true;
+	            var posicion = new L.LatLng(elemento.lat, elemento.lon);
+	            var popup = this.instance._poiInfo(elemento.tags, elemento.id);
+				//var popup = popup1(elemento.tags, elemento.id);
+				var icono_estacion_servicio = L.icon({
+					iconUrl: 'recursos/img/fuel.png',
+					iconSize: [24, 24],
+					iconAnchor: [-3, -3],
+					popupAnchor: [0, 0]
+				});
+				var marcador = L.marker(posicion, {
+					icon: icono_estacion_servicio
+				}).bindPopup(popup);
+				this.instance.addLayer(marcador);
+        	}
+      	},
+      	minZoomIndicatorOptions: {
+            position: 'topright',
+            minZoomMessageNoLayer: "no layer assigned",
+            minZoomMessage: "current Zoom-Level: CURRENTZOOM all data at Level: MINZOOMLEVEL"
+        }
+    }).addTo(mapa);
 
 	////////////////////////////////////////////////////////////////////////
 	// Funciones internas.
 	////////////////////////////////////////////////////////////////////////
 
 	// Funcion que muestra un pop por cada estacion de servicio.
-	function popup(feature, layer) {
+	function popup1(feature, layer) {
+		console.log("entro");
 		if(feature.properties){
 	        var popupString = '<div class="popup">';
 
