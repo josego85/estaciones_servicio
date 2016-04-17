@@ -19,7 +19,6 @@ function cargarMapa(){
 
 	// OverPassAPI overlay
 	var opl = new L.OverPassLayer({
-        //endpoint: "http://overpass.osm.rambler.ru/cgi/",
 	    minzoom: 12,
         query: "node(BBOX)['amenity'='fuel'];out;",
         callback: function(data) {
@@ -45,7 +44,7 @@ function cargarMapa(){
       	},
       	minZoomIndicatorOptions: {
             position: 'topright',
-            minZoomMessageNoLayer: "no layer assigned",
+            minZoomMessageNoLayer: "Ninguna capa asignada",
             minZoomMessage: "current Zoom-Level: CURRENTZOOM all data at Level: MINZOOMLEVEL"
         }
     }).addTo(mapa);
@@ -86,6 +85,12 @@ function cargarMapa(){
 	    locateOptions: {
 			maxZoom: zoom
 		}  // define location options e.g enableHighAccuracy: true or maxZoom: 10
+	}).addTo(mapa);
+
+	// Control escala.
+	L.control.scale({
+		metric: true,
+		imperial: true
 	}).addTo(mapa);
 
 	////////////////////////////////////////////////////////////////////////
