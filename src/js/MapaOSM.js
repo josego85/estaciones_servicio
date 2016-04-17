@@ -9,7 +9,7 @@ function cargarMapa(){
 	var latitud = -25.2961407;
 	var zoom = 14;
 
-	mapa =  L.map('mapa').setView([latitud, longitud], zoom);
+	mapa =  L.map('map-container').setView([latitud, longitud], zoom);
 
 	// Humanitarian Style.
 	L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {

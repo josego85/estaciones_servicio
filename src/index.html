@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="libs/leaflet/leaflet.css" />
     <link rel="stylesheet" href="libs/leaflet/plugins/leaflet-layer-overpass/OverPassLayer.css" />
     <link rel="stylesheet" href="libs/leaflet/plugins/leaflet-locatecontrol/L.Control.Locate.min.css" />
+    <link rel='stylesheet' href='libs/bootstrap-3.3.6-dist/css/bootstrap.css'/>
     <link rel='stylesheet' href='css/estilos.css'/>
 
      <!-- JS -->
@@ -17,12 +18,31 @@
     <script src="libs/leaflet/plugins/leaflet-layer-overpass/OverPassLayer.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="libs/leaflet/plugins/leaflet-locatecontrol/L.Control.Locate.min.js" type="text/javascript" charset="utf-8"></script>
     <script src='libs/jquery/jquery-2.2.1.min.js' type="text/javascript" charset="utf-8"></script>
+    <script src='libs/bootstrap-3.3.6-dist/js/bootstrap.min.js' type="text/javascript" charset="utf-8"></script>
     <script src="js/MapaOSM.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body onLoad="cargarMapa()">
-    <div id="mapa"></div>
-</body>
+    <div class="container">
+       <div class="row">
+           <div id="map-outer" class="col-md-12">
+               <div class="col-md-4">
+                   <h2>
+                       <center>Estaciones de Servicio de Paraguay</center>
+                   </h2>
+               </div>
+               <div id="map-container" class="col-md-8"></div>
+           </div><!-- map-outer -->
+       </div> <!-- row -->
+   </div><!-- container -->
 
-Cr&eacute;ditos:
-<div>Icons made by <a href="http://www.flaticon.com/authors/ocha" title="OCHA">OCHA</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+   <div class="container">
+      <div class="row">
+          Cr&eacute;ditos:
+          <ul>
+              <li>Proyectos Beta</li>
+              <li><div>Icono made by <a href="http://www.flaticon.com/authors/ocha" title="OCHA">OCHA</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div></li>
+          </ul>
+      </div> <!-- row -->
+  </div><!-- container -->
+</body>
 </html>

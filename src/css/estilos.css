@@ -1,4 +1,27 @@
-#mapa {
-    height: 80%;
-    width: 100%;
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background-color: #9CA2B0;
+    padding-top: 60px;
+}
+
+#map-container {
+    height: 400px;
+}
+
+#map-outer {
+    height: 440px;
+    padding: 20px;
+    border: 2px solid #CCC;
+    margin-bottom: 20px;
+    background-color: #FFF
+}
+
+@media all and (max-width: 991px) {
+    #map-outer  {
+        height: 650px
+    }
 }
