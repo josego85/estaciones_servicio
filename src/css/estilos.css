@@ -4,20 +4,23 @@ html {
 
 body {
     height: 100%;
-    background-color: #9CA2B0;
-    padding-top: 60px;
+    background-color: #234488;
+    padding: 60px 60px 60px 0px;
 }
 
 #map-container {
-    height: 400px;
+    height: 80%;
 }
 
 #map-outer {
-    height: 440px;
     padding: 20px;
     border: 2px solid #CCC;
-    margin-bottom: 20px;
     background-color: #FFF
+}
+
+#creditos{
+    padding: 20px;
+    color: white;
 }
 
 @media all and (max-width: 991px) {
