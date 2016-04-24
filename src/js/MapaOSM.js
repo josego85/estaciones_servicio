@@ -41,8 +41,8 @@ function cargarMapa(){
 	// OverPassAPI overlay
 	var opl = new L.OverPassLayer({
 	    minzoom: 12,
-        //query: "node(BBOX)['amenity'='fuel'];out;",
-		query: "node(BBOX)['wheelchair'];out;",
+        query: "node(BBOX)['amenity'='fuel'];out;",
+		//query: "node(BBOX)['wheelchair'];out;",
 		//query: "node(BBOX)['amenity'='fuel'];node(BBOX)['name'='Petrobras'];out;",
         callback: function(data) {
             for(var i = 0; i < data.elements.length; i++) {
@@ -54,8 +54,8 @@ function cargarMapa(){
 	            var posicion = new L.LatLng(elemento.lat, elemento.lon);
 				var popup = popup_info(elemento.tags, elemento.id);
 				var icono_estacion_servicio = L.icon({
-					//iconUrl: 'recursos/img/fuel.png',
-					iconUrl: 'recursos/img/wheelchair.png',
+					iconUrl: 'recursos/img/fuel.png',
+					// iconUrl: 'recursos/img/wheelchair.png',
 					iconSize: [24, 24],
 					iconAnchor: [-3, -3],
 					popupAnchor: [0, 0]
